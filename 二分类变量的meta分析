@@ -1,0 +1,29 @@
+
+setwd("D:/疝外科相关/文章/原始研究")
+
+##############  分类变量的meta分析 ##################
+
+ReadmissionRateRL <- read.xlsx(xlsxFile = "表8ReadmissionRate.xlsx",
+                             sheet = 1)
+
+m1 <- metabin(event.e = EventR, 
+              n.e = TotalR,
+              event.c = EventL,
+              n.c = TotalL,
+              random = T,
+              data = ReadmissionRateRL, 
+              studlab = Study,
+              sm = "OR")
+m1
+
+pdf(file = "D:/疝外科相关文章/原始研究/图片保存/ReadmissionRateRL.pdf",
+    width = 15,
+    height = 10)
+
+forest(m1,
+       squaresize = 0.7,
+       label.left = "Favours [Robotic surgery]",
+       label.right = "Favours [Laparoscopic surgery]",
+       fixed = F)
+
+dev.off()
