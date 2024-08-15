@@ -1,0 +1,36 @@
+
+# 加载相应R包
+library(openxlsx)
+library(meta)
+
+setwd("D:/疝外科相关/文章/原始研究")
+
+##############  连续变量的meta分析 ##################
+
+OperationTimeRL <- read.xlsx(xlsxFile = "表3OperationTime.xlsx",
+                             sheet = 1)
+
+colnames(OperationTimeRL)
+
+m <- metacont(n.e = TotalR,
+              mean.e = MeanR,
+              sd.e = SDR,
+              n.c = TotalL,
+              mean.c = MeanL,
+              sd.c = SDL,
+              studlab = Study,
+              data = OperationTimeRL)
+
+settings.meta("Revman5")
+
+pdf(file = "D:/疝外科相关/文章/原始研究/图片保存/OT_RvsL.pdf",
+    width = 15,
+    height = 10)
+
+forest(m,
+       squaresize = 0.7,
+       label.left = "Favours [Robotic surgery]",
+       label.right = "Favours [Laparoscopic surgery]",
+       fixed = F)
+
+dev.off()
