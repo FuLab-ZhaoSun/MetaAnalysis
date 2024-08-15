@@ -1,0 +1,8 @@
+library(estmeansd)
+
+## Estimate the sample mean and standard deviation using the MLN method according to the number and quartiles of the cohort.
+
+mln.mean.sd(q1.val = q1.val, 
+            med.val =  med.val, 
+            q3.val = q3.val,
+            n = n)
